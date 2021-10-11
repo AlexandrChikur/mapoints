@@ -14,6 +14,7 @@ ENV \
   POETRY_VERSION=1.1.4
 
 RUN apt-get update \
+    && apt-get install -y dos2unix \
     && apt-get install netcat -y \
     && python -m pip install --upgrade pip \
     && pip install "poetry==$POETRY_VERSION"
@@ -23,6 +24,7 @@ COPY ./poetry.lock ./pyproject.toml ./.env /app/
 RUN poetry install --no-dev
 
 COPY ./scripts/entrypoint.sh ../entrypoint.sh
+RUN dos2unix ../entrypoint.sh && apt-get --purge remove -y dos2unix && rm -rf /var/lib/apt/lists/*
 ENTRYPOINT ["../entrypoint.sh"]
 
 COPY ./app /app
