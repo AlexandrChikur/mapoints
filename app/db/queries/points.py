@@ -1,5 +1,3 @@
-
-
 GET_POINT_QUERY = """
 SELECT uid, name, x, y 
 FROM points

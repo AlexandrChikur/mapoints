@@ -11,7 +11,7 @@ def create_start_app_handler(app: FastAPI) -> Callable:
     async def start_app() -> None:
         await connect_to_db(app)
         app.state.points_repo = PointsRepository(app.state.pool)
-    
+
     return start_app
 
 
