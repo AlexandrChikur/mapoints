@@ -9,7 +9,7 @@ def get_application() -> FastAPI:
     application = FastAPI(
         title=settings.title,
         description=settings.description,
-        VERSION=settings.version,
+        version=settings.version,
         debug=settings.debug
     )
     
