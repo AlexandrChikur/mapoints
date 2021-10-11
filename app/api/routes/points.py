@@ -35,9 +35,12 @@ async def get_all_points(
     only_uids: Optional[bool] = False,
     points_repo: PointsRepository = Depends(get_repository(PointsRepository)),
 ) -> PointsInResponse:
+    points = None
     if only_uids:
-        return await points_repo.get_all_points_uids()
-    return await points_repo.get_all_points()
+        points = await points_repo.get_all_points_uids()
+    points = await points_repo.get_all_points()
+
+    return points
 
 
 @router.get(
@@ -50,4 +53,6 @@ async def get_all_points(
     uid: UUID,
     points_repo: PointsRepository = Depends(get_repository(PointsRepository)),
 ) -> PointInDB:
-    return await points_repo.get_point_by_uid(uid=uid)
+    point = await points_repo.get_point_by_uid(uid=uid)
+
+    return point
