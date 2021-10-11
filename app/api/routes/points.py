@@ -37,8 +37,11 @@ async def get_all_points(
     points_repo: PointsRepository = Depends(get_repository(PointsRepository)),
 ) -> PointsInResponse:
     points = None
+
     if only_uids:
         points = await points_repo.get_all_points_uids()
+        return points
+
     points = await points_repo.get_all_points()
 
     return points
