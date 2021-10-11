@@ -1,7 +1,7 @@
 from uuid import uuid4
 
 from app.db.queries.points import *
-from app.models.schemas.points import Point, PointInDB, PointsInResponse
+from app.models.schemas.points import Point, PointInDB, PointsInResponse, PointUID
 
 from .base import BaseRepository
 
@@ -23,5 +23,13 @@ class PointsRepository(BaseRepository):
             count=len(points), results=[PointInDB(**point) for point in points]
         )
 
+    async def get_all_points_uids(self) -> PointsInResponse:
+        points_uids = await self._conn.fetch(GET_ALL_POINTS_UIDS)
+
+        return PointsInResponse(
+            count=len(points_uids),
+            results=[PointUID(**uid) for uid in points_uids]
+        )
+    
     async def get_point_by_uid(self):
         pass

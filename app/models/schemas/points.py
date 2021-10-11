@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Union
 from uuid import UUID
 
 from pydantic import BaseModel
@@ -13,7 +13,9 @@ class Point(BaseModel):
 class PointInDB(Point):
     uid: UUID
 
+class PointUID(BaseModel):
+    uid: UUID
 
 class PointsInResponse(BaseModel):
     count: int
-    results: List[PointInDB]
+    results: List[Union[PointInDB, PointUID]]

@@ -11,3 +11,8 @@ INSERT INTO points (uid, name, x, y) VALUES ($1, $2, $3, $4)
 GET_ALL_POINTS = """
 SELECT * FROM points
 """
+
+GET_ALL_POINTS_UIDS = """
+SELECT uid
+FROM points
+"""
