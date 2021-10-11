@@ -2,8 +2,7 @@ from uuid import uuid4
 
 from app.db.errors import EtityDoesNotExistError
 from app.db.queries.points import *
-from app.models.schemas.points import (Point, PointInDB, PointsInResponse,
-                                       PointUID)
+from app.models.schemas.points import Point, PointInDB, PointsInResponse, PointUID
 
 from .base import BaseRepository
 
