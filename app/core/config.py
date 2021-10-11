@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     
     API_PREFIX: str = "/api"
     
-    database_url: str = Field("postgresql://127.0.0.1:5432/postgres", env="DATABASE_URL")
+    database_url: str = Field("postgresql://postgres:postgres@db:5432/postgres", env="DATABASE_URL")
     
     class Config:
         env_file = ".env"
