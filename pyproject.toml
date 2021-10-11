@@ -11,6 +11,8 @@ uvicorn = "^0.15.0"
 pydantic = {extras = ["dotenv"], version = "^1.8.2"}
 loguru = "^0.5.3"
 asyncpg = "^0.24.0"
+black = "^21.9b0"
+isort = "^5.9.3"
 
 [tool.poetry.dev-dependencies]
 

@@ -1,0 +1,2 @@
+class EtityDoesNotExistError(Exception):
+    pass

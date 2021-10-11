@@ -1,11 +1,18 @@
-
-
-GET_POINT_QUERY = """
-SELECT uid, x, y 
+GET_POINT_QUERY_BY_UID = """
+SELECT uid, name, x, y 
 FROM points
 WHERE uid = $1
 """
 
 CREATE_POINT_QUERY = """
-INSERT INTO points (uid, x, y) VALUES ($1, $2, $3)
+INSERT INTO points (uid, name, x, y) VALUES ($1, $2, $3, $4)
+"""
+
+GET_ALL_POINTS = """
+SELECT * FROM points
+"""
+
+GET_ALL_POINTS_UIDS = """
+SELECT uid
+FROM points
 """
