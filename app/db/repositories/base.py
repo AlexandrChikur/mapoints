@@ -6,5 +6,5 @@ class BaseRepository:
         self._conn = conn
         
     @property
-    def conntection(self) -> Connection:
+    def connection(self) -> Connection:
         return self._conn
