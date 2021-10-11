@@ -27,4 +27,4 @@ def get_repository(
     ) -> BaseRepository:
         return repo_type(conn)
 
-    return 
+    return _get_repo
