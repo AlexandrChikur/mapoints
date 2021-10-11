@@ -14,6 +14,7 @@ ENV \
   POETRY_VERSION=1.1.4
 
 RUN apt-get update \
+    && apt-get install netcat -y \
     && python -m pip install --upgrade pip \
     && pip install "poetry==$POETRY_VERSION"
 
@@ -21,6 +22,7 @@ COPY ./poetry.lock ./pyproject.toml ./.env /app/
 
 RUN poetry install --no-dev
 
-CMD ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
+COPY ./scripts/entrypoint.sh ../entrypoint.sh
+ENTRYPOINT ["../entrypoint.sh"]
 
 COPY ./app /app
