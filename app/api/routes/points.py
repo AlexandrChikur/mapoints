@@ -1,4 +1,5 @@
 from typing import List, Optional
+from uuid import UUID
 
 from fastapi import APIRouter, Body, Depends
 from starlette import status
@@ -37,3 +38,16 @@ async def get_all_points(
     if only_uids:
         return await points_repo.get_all_points_uids()
     return await points_repo.get_all_points()
+
+
+@router.get(
+    "/{uid}",
+    status_code=status.HTTP_200_OK,
+    response_model=PointInDB,
+    summary="Get point by UID",
+)
+async def get_all_points(
+    uid: UUID,
+    points_repo: PointsRepository = Depends(get_repository(PointsRepository)),
+) -> PointInDB:
+    return await points_repo.get_point_by_uid(uid=uid)

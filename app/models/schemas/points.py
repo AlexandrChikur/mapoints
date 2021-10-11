@@ -13,8 +13,10 @@ class Point(BaseModel):
 class PointInDB(Point):
     uid: UUID
 
+
 class PointUID(BaseModel):
     uid: UUID
+
 
 class PointsInResponse(BaseModel):
     count: int

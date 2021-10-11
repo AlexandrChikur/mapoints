@@ -1,4 +1,4 @@
-GET_POINT_QUERY = """
+GET_POINT_QUERY_BY_UID = """
 SELECT uid, name, x, y 
 FROM points
 WHERE uid = $1
