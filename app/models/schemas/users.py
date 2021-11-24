@@ -1,11 +1,11 @@
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, validator, Field
 
 from app.models.common import IDModelMixin
 from app.services import security
 
 
 class User(IDModelMixin, BaseModel):
-    username: str
+    username: str = Field(..., max_length=16)
 
 
 class UserInLogin(BaseModel):
