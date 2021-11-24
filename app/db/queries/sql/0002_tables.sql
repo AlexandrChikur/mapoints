@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS public.points (
 );
 
 CREATE TABLE IF NOT EXISTS public.users (
-    id INT PRIMARY KEY NOT NULL,
-    username VARCHAR(16) NOT NULL,
+    id BIGINT PRIMARY KEY NOT NULL DEFAULT (nextval('seqUsers')),
+    username VARCHAR(16) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL
 );

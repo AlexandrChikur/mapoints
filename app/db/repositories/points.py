@@ -1,6 +1,6 @@
 from uuid import uuid4
 
-from app.db.errors import EtityDoesNotExistError
+from app.db.errors.common import EntityDoesNotExistError
 from app.db.queries.points import *
 from app.models.schemas.points import Point, PointInDB, PointsInResponse, PointUID
 
@@ -37,4 +37,4 @@ class PointsRepository(BaseRepository):
         if point:
             return PointInDB(**point)
 
-        raise EtityDoesNotExistError(f"Entity with uid <{uid}> does not exist")
+        raise EntityDoesNotExistError(f"Entity with uid <{uid}> does not exist")

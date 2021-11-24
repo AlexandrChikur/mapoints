@@ -6,7 +6,7 @@ from fastapi.responses import JSONResponse
 from starlette import status
 
 from app.api.dependencies.database import get_repository
-from app.db.errors import EtityDoesNotExistError
+from app.db.errors.common import EntityDoesNotExistError
 from app.db.repositories.points import PointsRepository
 from app.models.schemas.maps import Map
 from app.models.schemas.points import Point, PointInDB, PointsInResponse
@@ -29,7 +29,7 @@ async def get_map_routes(
     for uid in points_uids:
         try:
             point = await points_repo.get_point_by_uid(uid=uid)
-        except EtityDoesNotExistError:
+        except EntityDoesNotExistError:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail=f"Point with uid: <{uid}> not found",
@@ -62,7 +62,7 @@ async def get_best_route(
     for uid in points_uids:
         try:
             point = await points_repo.get_point_by_uid(uid=uid)
-        except EtityDoesNotExistError:
+        except EntityDoesNotExistError:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail=f"Point with uid: <{uid}> not found",

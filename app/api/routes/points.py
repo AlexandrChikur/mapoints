@@ -5,7 +5,7 @@ from fastapi import APIRouter, Body, Depends, HTTPException
 from starlette import status
 
 from app.api.dependencies.database import get_repository
-from app.db.errors import EtityDoesNotExistError
+from app.db.errors.common import EntityDoesNotExistError
 from app.db.repositories.points import PointsRepository
 from app.models.schemas.points import Point, PointInDB, PointsInResponse
 
@@ -59,7 +59,7 @@ async def get_point_by_uid(
 ) -> Union[PointInDB, Any]:
     try:
         point = await points_repo.get_point_by_uid(uid=uid)
-    except EtityDoesNotExistError:
+    except EntityDoesNotExistError:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="not found")
 
     return point
