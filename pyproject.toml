@@ -1,18 +1,21 @@
 [tool.poetry]
-name = "abrash_ipp_pr4"
-version = "0.1.0"
-description = ""
-authors = ["Abrash E.N"]
+name = "mapoints"
+version = "0.2.0"
+description = "The API for building a map of the points and finding the best way."
+authors = ["Alexandr Chikur <alexandr.chikur@mail.ru>"]
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.8"
 fastapi = {extras = ["uvicorn"], version = "^0.70.0"}
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+PyJWT = "^2.3.0"
+psycopg2-binary = "^2.9.2"
 uvicorn = "^0.15.0"
-pydantic = {extras = ["dotenv"], version = "^1.8.2"}
 loguru = "^0.5.3"
-asyncpg = "^0.24.0"
-black = "^21.9b0"
-isort = "^5.9.3"
+asyncpg = "^0.25.0"
+isort = "^5.10.1"
+black = "^21.11b1"
+pydantic = {extras = ["dotenv"], version = "^1.8.2"}
 
 [tool.poetry.dev-dependencies]
 
