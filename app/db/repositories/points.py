@@ -2,8 +2,7 @@ from typing import Optional
 
 from app.db.errors.common import EntityDoesNotExistError
 from app.db.queries.points import *
-from app.models.schemas.points import (Point, PointIDOnly, PointInDB,
-                                       PointsInResponse)
+from app.models.schemas.points import PointIDOnly, PointInDB, PointsInResponse
 
 from .base import BaseRepository
 

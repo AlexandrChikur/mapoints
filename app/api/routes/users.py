@@ -5,8 +5,7 @@ from app.core.config import settings
 from app.db.errors.common import EntityDoesNotExistError
 from app.db.errors.users import WrongLoginError, WrongUserIdError
 from app.db.repositories.users import UsersRepository
-from app.models.schemas.users import (User, UserInCreate, UserInDB,
-                                      UserInResponse, UserWithToken)
+from app.models.schemas.users import User, UserInCreate, UserInResponse, UserWithToken
 from app.resources import strings
 from app.services import jwt
 from app.services.auth import check_username_is_taken

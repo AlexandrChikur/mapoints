@@ -1,14 +1,13 @@
-from typing import Any, List, Optional, Union
+from typing import Any, Optional, Union
 
-from fastapi import APIRouter, Body, Depends, HTTPException, Request
+from fastapi import APIRouter, Body, Depends, HTTPException
 from starlette import status
 
 from app.api.dependencies.auth import get_current_user_authorizer
 from app.api.dependencies.database import get_repository
 from app.db.errors.common import EntityDoesNotExistError
 from app.db.repositories.points import PointsRepository
-from app.models.schemas.points import (Point, PointInCreate, PointInDB,
-                                       PointsInResponse)
+from app.models.schemas.points import Point, PointInCreate, PointInDB, PointsInResponse
 from app.models.schemas.users import UserInDB
 from app.resources import strings
 

@@ -4,7 +4,6 @@ from typing import List, Optional, Union
 from pydantic import BaseModel, Field
 
 from app.models.common import IDModelMixin
-from app.models.schemas.users import User
 
 
 class Point(BaseModel):

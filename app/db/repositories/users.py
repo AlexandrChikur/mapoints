@@ -1,11 +1,11 @@
-from typing import Optional
-
 from app.db.errors.common import EntityDoesNotExistError
-from app.db.queries.users import (CREATE_USER_QUERY,
-                                  CREATE_USER_QUERY_RETURNING_ID,
-                                  GET_USER_BY_ID, GET_USER_BY_USERNAME)
+from app.db.queries.users import (
+    CREATE_USER_QUERY_RETURNING_ID,
+    GET_USER_BY_ID,
+    GET_USER_BY_USERNAME,
+)
 from app.db.repositories.base import BaseRepository
-from app.models.schemas.users import UserInDB, UserInResponse
+from app.models.schemas.users import UserInDB
 
 
 class UsersRepository(BaseRepository):
