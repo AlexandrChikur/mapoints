@@ -5,13 +5,8 @@ from app.core.config import settings
 from app.db.errors.common import EntityDoesNotExistError
 from app.db.errors.users import WrongLoginError, WrongUserIdError
 from app.db.repositories.users import UsersRepository
-from app.models.schemas.users import (
-    User,
-    UserInCreate,
-    UserInDB,
-    UserInResponse,
-    UserWithToken,
-)
+from app.models.schemas.users import (User, UserInCreate, UserInDB,
+                                      UserInResponse, UserWithToken)
 from app.resources import strings
 from app.services import jwt
 from app.services.auth import check_username_is_taken
@@ -23,7 +18,7 @@ router = APIRouter()
     "/signup",
     status_code=status.HTTP_200_OK,
     response_model=UserInResponse,
-    summary="Create User"
+    summary="Create User",
 )
 async def user_signup(
     user_create: UserInCreate = Body(..., alias="user"),
@@ -45,7 +40,7 @@ async def user_signup(
     "/login",
     status_code=status.HTTP_200_OK,
     response_model=UserInResponse,
-    summary="Login User"
+    summary="Login User",
 )
 async def user_login(
     user_login: UserInCreate = Body(..., alias="user"),
@@ -70,7 +65,7 @@ async def user_login(
     "/{id}",
     status_code=status.HTTP_200_OK,
     response_model=User,
-    summary="Get user by id"
+    summary="Get user by id",
 )
 async def get_user_by_id(
     id: int = Query(..., title="id", description="user id"),
@@ -80,5 +75,5 @@ async def get_user_by_id(
         user = await users_repo.get_user_by_id(id=id)
     except EntityDoesNotExistError:
         raise WrongUserIdError
-    
+
     return User(id=user.id, username=user.username)

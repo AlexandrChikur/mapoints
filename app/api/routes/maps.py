@@ -1,5 +1,4 @@
 from typing import List, Optional
-from uuid import UUID
 
 from fastapi import APIRouter, Body, Depends, HTTPException, Query
 from fastapi.responses import JSONResponse
@@ -21,18 +20,18 @@ router = APIRouter()
     summary="Get all routes of the map",
 )
 async def get_map_routes(
-    points_uids: List[UUID] = Query(..., alias="points_uids"),
+    points_ids: List[int] = Query(..., alias="points_ids"),
     points_repo: PointsRepository = Depends(get_repository(PointsRepository)),
 ) -> List:
     """Returns a list of routes that consists in map of provided points"""
     points = []
-    for uid in points_uids:
+    for id in points_ids:
         try:
-            point = await points_repo.get_point_by_uid(uid=uid)
+            point = await points_repo.get_point_by_id(id=id)
         except EntityDoesNotExistError:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
-                detail=f"Point with uid: <{uid}> not found",
+                detail=f"Point with id: <{id}> not found",
             )
         points.append(point)
 
@@ -48,7 +47,7 @@ async def get_map_routes(
     summary="Get the best route of all routes",
 )
 async def get_best_route(
-    points_uids: List[UUID] = Query(..., alias="points_uids"),
+    points_ids: List[int] = Query(..., alias="points_ids"),
     with_total: Optional[bool] = Query(False),
     points_repo: PointsRepository = Depends(get_repository(PointsRepository)),
 ) -> List:
@@ -59,13 +58,13 @@ async def get_best_route(
     points = []
     total_distance = None
 
-    for uid in points_uids:
+    for id in points_ids:
         try:
-            point = await points_repo.get_point_by_uid(uid=uid)
+            point = await points_repo.get_point_by_id(id=id)
         except EntityDoesNotExistError:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
-                detail=f"Point with uid: <{uid}> not found",
+                detail=f"Point with id: <{id}> not found",
             )
         points.append(point)
 
@@ -78,6 +77,6 @@ async def get_best_route(
     return JSONResponse(
         content={
             "route": best_route,
-            "total_distance": total_distance if total_distance else None,
+            "total_distance": total_distance,
         }
     )

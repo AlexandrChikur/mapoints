@@ -1,4 +1,4 @@
-from pydantic import BaseModel, validator, Field
+from pydantic import BaseModel, Field, validator
 
 from app.models.common import IDModelMixin
 from app.services import security

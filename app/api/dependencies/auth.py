@@ -5,7 +5,7 @@ from fastapi.security import APIKeyHeader
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.api.dependencies.database import get_repository
-from app.core.config import JWT_TOKEN_PREFIX, SECRET_KEY
+from app.core.config import settings
 from app.db.errors.common import EntityDoesNotExistError
 from app.db.repositories.users import UsersRepository
 from app.models.schemas.users import UserInDB
@@ -50,7 +50,7 @@ def _get_authorization_header(
             detail=strings.WRONG_TOKEN_PREFIX,
         )
 
-    if token_prefix != JWT_TOKEN_PREFIX:
+    if token_prefix != settings.JWT_TOKEN_PREFIX:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail=strings.WRONG_TOKEN_PREFIX,
@@ -75,7 +75,7 @@ async def _get_current_user(
     token: str = Depends(_get_authorization_header_retriever()),
 ) -> UserInDB:
     try:
-        username = jwt.get_username_from_token(token, str(SECRET_KEY))
+        username = jwt.get_username_from_token(token, str(settings.SECRET_KEY))
     except ValueError:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,

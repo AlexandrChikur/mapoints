@@ -1,8 +1,10 @@
 import math
 from typing import List, Optional, Union
-from uuid import UUID
 
 from pydantic import BaseModel, Field
+
+from app.models.common import IDModelMixin
+from app.models.schemas.users import User
 
 
 class Point(BaseModel):
@@ -10,19 +12,22 @@ class Point(BaseModel):
     x: int
     y: int
 
-
     def get_distance_to_another_point(self, point) -> float:
         return math.sqrt((point.x - self.x) ** 2 + (point.y - self.y) ** 2)
 
 
-class PointInDB(Point):
-    uid: UUID
+class PointInDB(Point, IDModelMixin):
+    user_id: int
 
 
-class PointUID(BaseModel):
-    uid: UUID
+class PointInCreate(Point):
+    user_id: int
+
+
+class PointIDOnly(IDModelMixin):
+    pass
 
 
 class PointsInResponse(BaseModel):
     count: int
-    results: List[Union[PointInDB, PointUID]]
+    results: List[Union[PointInDB, PointIDOnly]]

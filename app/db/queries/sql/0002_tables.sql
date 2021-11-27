@@ -8,7 +8,6 @@ CREATE TABLE IF NOT EXISTS public.users (
 
 CREATE TABLE IF NOT EXISTS public.points (
     id INT PRIMARY KEY NOT NULL DEFAULT (nextval('seqPoints')),
-    uid UUID,
     name VARCHAR(24),
     x INT,
     y INT,
