@@ -1,12 +1,13 @@
 import math
 from typing import List, Optional, Union
-from uuid import UUID
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+
+from app.models.common import IDModelMixin
 
 
 class Point(BaseModel):
-    name: Optional[str] = None
+    name: Optional[str] = Field(None, max_length=24)
     x: int
     y: int
 
@@ -14,14 +15,18 @@ class Point(BaseModel):
         return math.sqrt((point.x - self.x) ** 2 + (point.y - self.y) ** 2)
 
 
-class PointInDB(Point):
-    uid: UUID
+class PointInDB(Point, IDModelMixin):
+    user_id: int
 
 
-class PointUID(BaseModel):
-    uid: UUID
+class PointInCreate(Point):
+    user_id: int
+
+
+class PointIDOnly(IDModelMixin):
+    pass
 
 
 class PointsInResponse(BaseModel):
     count: int
-    results: List[Union[PointInDB, PointUID]]
+    results: List[Union[PointInDB, PointIDOnly]]

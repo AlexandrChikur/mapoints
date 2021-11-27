@@ -1,7 +1,6 @@
 from typing import Callable
 
 from fastapi import FastAPI
-from loguru import logger
 
 from app.db.events import connect_to_db, disconnect_db
 from app.db.repositories.points import PointsRepository
