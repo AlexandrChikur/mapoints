@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     description: str = (
         "The API for building a map of the points and finding the best way."
     )
-    version: str = "0.2.2"
+    version: str = "0.3.0"
     debug: bool = Field(False, env="DEBUG")
 
     API_PREFIX: str = "/api"
