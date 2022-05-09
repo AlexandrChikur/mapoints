@@ -1,16 +1,16 @@
 # API details messages
 
-INCORRECT_LOGIN_INPUT = "incorrect login or password"
-USERNAME_TAKEN = "user with this username already exists"
-USER_ID_DOESNT_EXISTS = "user with provided id does not exist"
-WRONG_TOKEN_PREFIX = "unsupported authorization type"
-MALFORMED_PAYLOAD = "could not validate credentials"
+INCORRECT_LOGIN_INPUT = "Incorrect login or password"
+USERNAME_TAKEN = "A user with this username already exists"
+USER_ID_DOESNT_EXISTS = "User with provided id does not exist"
+WRONG_TOKEN_PREFIX = "Unsupported authorization type"
+MALFORMED_PAYLOAD = "Could not validate credentials"
 
-AUTHENTICATION_REQUIRED = "authentication required"
+AUTHENTICATION_REQUIRED = "Authentication required"
 
-PERMISSION_DENIED = "user do not have required permissions"
+PERMISSION_DENIED = "A user do not have required permissions"
 
 NOT_POINT_OWNER_ERROR_MESSAGE = (
-    "you're not the owner of the point that you trying to get"
+    "You're not the owner of the point that you trying to get"
 )
-NOT_FOUND_MESSAGE = "nothing found for this request"
+NOT_FOUND_MESSAGE = "Nothing found for this request"

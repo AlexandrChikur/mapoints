@@ -26,7 +26,7 @@ class UsersRepository(BaseRepository):
         if user_row:
             return UserInDB(**user_row)
 
-        raise EntityDoesNotExistError(f"user with id: {id} does not exist")
+        raise EntityDoesNotExistError(f"A user with id: {id} does not exist")
 
     async def get_user_by_username(self, *, username: str) -> UserInDB:
         user_row = await self._conn.fetchrow(GET_USER_BY_USERNAME, username)
@@ -34,4 +34,4 @@ class UsersRepository(BaseRepository):
         if user_row:
             return UserInDB(**user_row)
 
-        raise EntityDoesNotExistError(f"user with username {username} does not exist")
+        raise EntityDoesNotExistError(f"A user with username {username} does not exist")
