@@ -1,6 +1,7 @@
 from typing import Any, Optional, Union
 
-from fastapi import APIRouter, Body, Depends, HTTPException
+from fastapi import APIRouter, Body, Depends, HTTPException, Response
+from fastapi.responses import JSONResponse
 from starlette import status
 
 from app.api.dependencies.auth import get_current_user_authorizer
@@ -110,10 +111,41 @@ async def get_point_user_by_id(
             status_code=status.HTTP_404_NOT_FOUND, detail=strings.NOT_FOUND_MESSAGE
         )
 
+    # TODO: get_point_user_by_id & delete_point_user_by_id have same point owner checking -> fix.
     if point.user_id != current_user.id:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail=strings.NOT_POINT_OWNER_ERROR_MESSAGE,
         )
 
+    return point
+
+@router.delete(
+    "/my/{id}",
+    status_code=status.HTTP_200_OK,
+    response_model=Union[PointInDB, Any],
+    summary="Delete point by ID that user creates",
+    dependencies=[Depends(get_current_user_authorizer())],
+)
+async def delete_point_user_by_id(
+    id: int,
+    current_user: UserInDB = Depends(get_current_user_authorizer()),
+    points_repo: PointsRepository = Depends(get_repository(PointsRepository)),
+) -> Union[PointInDB, Any]:
+    try:
+        point = await points_repo.get_point_by_id(id=id)
+    except EntityDoesNotExistError:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=strings.NOT_FOUND_MESSAGE
+        )
+
+    # TODO: get_point_user_by_id & delete_point_user_by_id have same point owner checking -> fix.
+    if point.user_id != current_user.id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=strings.NOT_POINT_OWNER_ERROR_MESSAGE,
+        )
+        
+    await points_repo.delete_point_by_id(id=id)
+    
     return point

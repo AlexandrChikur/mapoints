@@ -4,6 +4,11 @@ FROM points
 WHERE id = $1
 """
 
+DELETE_POINT_QUERY_BY_ID = """
+DELETE FROM points
+WHERE points.id = $1
+"""
+
 GET_POINTS_QUERY_BY_USER_ID = """
 SELECT id, name, x, y, user_id
 FROM points

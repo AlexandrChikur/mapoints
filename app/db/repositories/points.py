@@ -50,3 +50,6 @@ class PointsRepository(BaseRepository):
             return PointInDB(**point)
 
         raise EntityDoesNotExistError(f"Entity with id <{id}> does not exist")
+    
+    async def delete_point_by_id(self, *, id: int) -> None:
+        point = await self._conn.execute(DELETE_POINT_QUERY_BY_ID, id)
