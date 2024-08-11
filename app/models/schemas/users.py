@@ -6,6 +6,7 @@ from app.services import security
 
 class User(IDModelMixin, BaseModel):
     username: str = Field(..., max_length=16)
+    points_amount: int = Field(0, ge=0, le=10)
 
 
 class UserInLogin(BaseModel):

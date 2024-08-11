@@ -26,7 +26,9 @@ class PointInCreate(Point):
 class PointIDOnly(IDModelMixin):
     pass
 
+class PointFullData(PointInDB):
+    author_name: Optional[str] = Field(None, max_length=16)
 
 class PointsInResponse(BaseModel):
     count: int
-    results: List[Union[PointInDB, PointIDOnly]]
+    results: List[Union[PointFullData, PointIDOnly]]

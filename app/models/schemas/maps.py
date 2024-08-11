@@ -4,7 +4,7 @@ from typing import List, Union
 
 from pydantic import BaseModel
 
-from app.models.schemas.points import Point, PointInDB
+from app.models.schemas.points import Point, PointInDB, PointFullData
 
 
 class Map(BaseModel):
@@ -12,6 +12,19 @@ class Map(BaseModel):
 
     def get_routes_amount(self):
         return math.factorial(len(self.points) - 1)
+    
+    # TODO: Fast resolve object mapping problem.
+    def __parse_row(self, row: str) -> dict:
+        result = {}
+        fields = row.split()
+        for field in fields:
+            k,v = field.split("=")
+            if v.isnumeric():
+                result[k] = int(v)
+                continue
+            result[k] = v.strip("'")
+            
+        return result
 
     def __get_distanced_route(self, route) -> list:
         """
@@ -22,11 +35,11 @@ class Map(BaseModel):
 
         for i in range(0, len(route) - 1):
             route_pairs.append(
-                (
-                    str(route[i]),
-                    str(route[i + 1]),
-                    route[i].get_distance_to_another_point(route[i + 1]),
-                )
+                {
+                    "from": self.__parse_row(str(route[i])),
+                    "to": self.__parse_row(str(route[i + 1])),
+                    "dist": route[i].get_distance_to_another_point(route[i + 1]),
+                }
             )
 
         return route_pairs
@@ -56,7 +69,7 @@ class Map(BaseModel):
         distance = 0
 
         for point in route:
-            distance += point[2]  # point: (from, to, -> distance <-)
+            distance += point["dist"]  # point: (from, to, -> distance <-)
 
         return distance
 

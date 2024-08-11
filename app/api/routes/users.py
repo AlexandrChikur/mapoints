@@ -56,7 +56,7 @@ async def user_login(
     token = jwt.create_access_token_for_user(user, str(settings.SECRET_KEY))
 
     return UserInResponse(
-        user=UserWithToken(id=user.id, username=user.username, token=token)
+        user=UserWithToken(id=user.id, username=user.username, token=token, points_amount=user.points_amount)
     )
 
 
@@ -75,4 +75,4 @@ async def get_user_by_id(
     except EntityDoesNotExistError:
         raise WrongUserIdError
 
-    return User(id=user.id, username=user.username)
+    return User(id=user.id, username=user.username, points_amount=user.points_amount)

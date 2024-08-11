@@ -9,13 +9,13 @@ VALUES ($1, $2)
 RETURNING id
 """
 GET_USER_BY_ID = """
-SELECT id, username, password
+SELECT id, username, password, points_amount
 FROM public.users
 WHERE id = $1
 """
 
 GET_USER_BY_USERNAME = """
-SELECT id, username, password
+SELECT id, username, password, points_amount
 FROM public.users
 where username = $1
 
